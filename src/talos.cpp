@@ -110,7 +110,7 @@ void TalosCommonRobotModule::setupCommon()
 
 TalosRobotModule::TalosRobotModule(bool fixed) : TalosCommonRobotModule()
 {
-  urdf_path = path + "/urdf/talos_full_v2.urdf";
+  urdf_path = path + "/talos_full_v2.urdf";
   _real_urdf = urdf_path;
   init(rbd::parsers::from_urdf_file(urdf_path, fixed, {}, true, "base_link"));
   setupCommon();
