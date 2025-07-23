@@ -32,8 +32,8 @@ macro(generate_mc_rtc_urdf )
   message(STATUS "lxacro_src: ${lxacro_src}")
   message(STATUS "lrobot_name: ${lrobot_name}")
   message(STATUS "lrobot_root_xacro ${lrobot_root_xacro}")
-  message(STATUS "lxacro_args ${lxacro_args}")    
-  
+  message(STATUS "lxacro_args ${lxacro_args}")
+
   find_package(ament_cmake REQUIRED)
   find_package(${lrobot_description} REQUIRED)
 
@@ -74,17 +74,19 @@ macro(generate_mc_rtc_urdf )
   message(STATUS "urdf_out: ${urdf_OUT}")
   message(STATUS "XACRO:${XACRO}")
   message(STATUS "xacro_in: ${xacro_IN}")
-  message(STATUS "xacro_SRC: ${xacro_SRC}")  
+  message(STATUS "xacro_SRC: ${xacro_SRC}")
   message(STATUS "xacro_args: ${lxacro_args}")
-  message(STATUS "urdf_OUT: ${urdf_OUT}")  
-  
+  message(STATUS "urdf_OUT: ${urdf_OUT}")
+
   # Call xacro
   add_custom_command(
     OUTPUT ${urdf_OUT}
-    COMMAND ${XACRO} ${xacro_SRC} ${xacro_args} -o ${urdf_OUT}
+    COMMAND ${XACRO} ${xacro_SRC} -o ${urdf_OUT} ${xacro_args}
     DEPENDS ${xacro_SRC}
     COMMENT "Generate ${urdf_OUT}")
   add_custom_target(generate_urdf ALL DEPENDS ${urdf_OUT})
+
+  add_custom_target(generate_talos_urdf ALL DEPENDS ${urdf_OUT})
 
   # Install
   install(FILES "${urdf_OUT}" DESTINATION ${DATA_INSTALL_FOLDER}/urdf/)
