@@ -11,22 +11,20 @@ find_package(talos_description REQUIRED)
 # Generate URDF
 set(robot_name "talos_full_v2")
 set(xacro_src "")
-set(xacro_args
-  "used-fixed_base:=false"
-  "use_sim:=False"
-  "test:=False"
-  "robot_model:=full_v2"
-  "enable_crane:=False"
-  "foot_collision:=thinbox"
-  "disable_gazebo_camera:=true"
-  "head_type:=default"
-  "flexibility:=False"
-  "default_configuration_type:=False"
-)
+set(xacro_args "used-fixed_base:=False")
+list(APPEND xacro_args "use_sim:=False")
+list(APPEND xacro_args "test:=False")
+list(APPEND xacro_args "robot_model:=full_v2")
+list(APPEND xacro_args "enable_crane:=False")
+list(APPEND xacro_args "foot_collision:=thinbox")
+list(APPEND xacro_args "disable_gazebo_camera:=true")
+list(APPEND xacro_args "head_type:=default")
+list(APPEND xacro_args "flexibility:=False")
+list(APPEND xacro_args "default_configuration_type:=False")
 
 set(robot_root_xacro "robots/talos_full_v2.urdf.xacro")
 
-generate_mc_rtc_urdf(talos_description "${xacro_src}" "${robot_name}" "${robot_root_xacro}" "${xacro_args}")
+generate_mc_rtc_urdf(talos_description "${xacro_src}" "${robot_name}" "${robot_root_xacro}" ${xacro_args})
 
 if("${talos_description_DIR}" STREQUAL "")
   message(FATAL_ERROR "Your talos_description package does not define where to find the data")
